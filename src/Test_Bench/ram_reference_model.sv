@@ -1,4 +1,4 @@
-//`include "defines.svh"
+`include "defines.svh"
 
 class ram_reference_model;
 
@@ -26,7 +26,6 @@ class ram_reference_model;
     for (int i = 0; i < `num_transactions; i++) begin
 
       ref_trans = new();
-
       mbx_dr.get(ref_trans);
 
       repeat(1) @(vif.ref_cb) begin
@@ -40,8 +39,11 @@ class ram_reference_model;
           MEM[ref_trans.address],
           $time
         );
- if (ref_trans.read_enb)
+
+        if (ref_trans.read_enb)
           ref_trans.data_out = MEM[ref_trans.address];
+        else
+          ref_trans.data_out = 8'bz;     
 
         $display(
           "REFERENCE MODEL DATA OUT FROM MEMORY data_out=%0h",
@@ -49,9 +51,9 @@ class ram_reference_model;
           $time
         );
 
-     end
+      end
 
-      $display("REF BEFORE PUT: addr=%0h data_out=%0h",ref_trans.address, ref_trans.data_out);
+      $display("REF BEFORE PUT: addr=%0h data_out=%0h", ref_trans.address, ref_trans.data_out);
 
       mbx_rs.put(ref_trans);
 
