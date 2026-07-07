@@ -31,9 +31,8 @@ class ram_scoreboard;
       fork
         begin
           mbx_rs.get(ref2sb_trans);
-        $display("SB AFTER GET: addr=%0h data_out=%0h", ref2sb_trans.address, ref2sb_trans.data_out);
+          $display("SB AFTER GET: addr=%0h data_out=%0h", ref2sb_trans.address, ref2sb_trans.data_out);
           ref_mem[ref2sb_trans.address] = ref2sb_trans.data_out;
-
           $display(
             "############SCOREBOARD REF data_out=%0h, ADDRESS=%0h###############",
             ref_mem[ref2sb_trans.address],
@@ -41,11 +40,9 @@ class ram_scoreboard;
             $time
           );
         end
- begin
+        begin
           mbx_ms.get(mon2sb_trans);
-
           mon_mem[mon2sb_trans.address] = mon2sb_trans.data_out;
-
           $display(
             "!!!!!!!!!!!!!SCOREBOARD MON data_out=%0h, ADDRESS=%0h!!!!!!!!!!!!!!",
             mon_mem[mon2sb_trans.address],
@@ -62,9 +59,7 @@ class ram_scoreboard;
 
   endtask
 
-task compare_report();
-
-  if (ref2sb_trans.read_enb) begin
+  task compare_report();
 
     if (ref_mem[ref2sb_trans.address] === mon_mem[mon2sb_trans.address]) begin
       $display(
@@ -83,15 +78,10 @@ task compare_report();
         mon_mem[mon2sb_trans.address],
         $time
       );
-      
       ++MISMATCH;
       $display("DATA MATCH FAILURE. MISMATCH count = %0d", MISMATCH);
     end
 
-  end
-
-endtask
+  endtask
 
 endclass
-
-
