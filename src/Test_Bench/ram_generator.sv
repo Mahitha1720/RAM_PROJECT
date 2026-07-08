@@ -25,7 +25,7 @@ task start();
   );
 
   rd_trans = new();
-  assert(rd_trans.randomize() with { address == wr_trans.address; });
+  assert(rd_trans.randomize());
   mbx_gd.put(rd_trans.copy());
   $display(
     "GENERATOR Randomized transaction data_in=%0h, write_enb=%0d, read_enb=%0d, address=%0h @%0t",
