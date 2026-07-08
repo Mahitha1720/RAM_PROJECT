@@ -34,7 +34,7 @@ class ram_scoreboard;
           $display("SB AFTER GET: addr=%0h data_out=%0h", ref2sb_trans.address, ref2sb_trans.data_out);
           ref_mem[ref2sb_trans.address] = ref2sb_trans.data_out;
           $display(
-            "############SCOREBOARD REF data_out=%0h, ADDRESS=%0h###############",
+            "SCOREBOARD REF data_out=%0h, ADDRESS=%0h",
             ref_mem[ref2sb_trans.address],
             ref2sb_trans.address,
             $time
@@ -44,7 +44,7 @@ class ram_scoreboard;
           mbx_ms.get(mon2sb_trans);
           mon_mem[mon2sb_trans.address] = mon2sb_trans.data_out;
           $display(
-            "!!!!!!!!!!!!!SCOREBOARD MON data_out=%0h, ADDRESS=%0h!!!!!!!!!!!!!!",
+            "SCOREBOARD MON data_out=%0h, ADDRESS=%0h",
             mon_mem[mon2sb_trans.address],
             mon2sb_trans.address,
             $time
